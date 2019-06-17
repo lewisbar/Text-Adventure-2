@@ -49,7 +49,7 @@ class Game:
 			hp=100, 
 			weapon=Fists()
 		)
-		self.move_to(0, 2)
+		self.move_to(0, 0)
 		self.is_playing = True
 		
 	def possible_actions(self, x, y):
