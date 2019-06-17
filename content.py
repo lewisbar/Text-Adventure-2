@@ -1,28 +1,47 @@
-class Monster:
-	def __init__(self, name, description, hp, damage, item):
+class Content:
+	def __init__(self, name, pre_description, post_description):
 		self.name = name
-		self.description = description
+		self.pre_description = pre_description
+		self.post_description = post_description
+		self.is_explored = False
+		self.is_done = False
+	
+	def description(self):
+		if not self.is_done:
+			return self.pre_description
+		else:
+			return self.post_description
+
+class Monster(Content):
+	def __init__(self, name, pre_description, post_description, hp, damage, loot_effect=None):
+		super().__init__(name, pre_description, post_description)
 		self.hp = hp
 		self.damage = damage
-		self.item = item
+		self.effect = loot_effect
 	
-class FriendlyCharacter:
-	def __init__(self, name, text, item):
-		self.name = name
-		self.text = text
-		self.item = item
+	def attack(self, player):
+		player.hp -= self.damage
 
-class Item:
-	def __init__(self, name, description, action=None, effect=None):
-		self.name = name
-		self.description = description
+class Item(Content):
+	def __init__(self, name, pre_description, post_description, action=None, effect=None):
+		super().__init__(name, pre_description, post_description)
 		self.action = action
 		self.effect = effect
 
-class Weapon:
-	def __init__(self, name, description, damage, prefix=None, effect=None):
-		self.name = name
-		self.description = description
+class Weapon(Item):
+	def __init__(self, name, pre_description, post_description, damage, prefix='', boost=0, action=None, effect=None):
+		super().__init__(name, pre_description, post_description, action, effect)
 		self.damage = damage
 		self.prefix = prefix
-		self.effect = effect
+		self.boost = boost
+	
+	def damage_with_boost(self):
+		return self.damage + self.boost
+
+	def name_with_prefix(self):
+		return self.prefix + self.name
+
+class Door(Content):
+	def __init__(self, name, pre_description, post_description, direction):
+		super().__init__(name, pre_description, post_description)
+		self.direction = direction
