@@ -140,6 +140,27 @@ New weapon: Axe
 				weapon=self
 			)
 		)
+class OldSword(Weapon):
+	def __init__(self):
+		super().__init__(
+			name='Old Sword',
+			pre_description='''
+There is a small cottage in the shade of the forest. You see an old man on the porch.
+''',
+			post_description='''
+The old man you met before is now gone.
+''',
+			damage=45,
+			action='Talk to old man',
+			effect=Effect(
+				description='''
+Old man:
+	When I was young, I used to fight those monsters. Now I\'m too old to fight. I can only hide from them. Take my old sword.
+''',
+				weapon=self
+			)
+		)
+	
 class NewSword(Weapon):
 	def __init__(self):
 		super().__init__(
@@ -148,8 +169,8 @@ class NewSword(Weapon):
 			post_description=None,
 			damage=60
 		)
-	
-# Healing
+
+# Health
 class Spring(Item):
 	def __init__(self):
 		super().__init__(
@@ -166,6 +187,118 @@ There is something dead lying in the water. You shouldn\'t drink here.
 You refresh yourself with the clear water. You gain 10 HP.
 ''',
 				hp=10
+			)
+		)
+
+class BrPlate(Item):
+	def __init__(self):
+		super().__init__(
+			name='Woman',
+			pre_description='''
+You walk into a small village. It looks abandoned. Then you notice a woman peeking out of the window of a forge. As she sees you, she disappears into the house. Shortly after, she opens the door, waving you to come to her, all the while looking anxiously left and right.
+''',
+		post_description='''
+The woman is gone. You hope she is safely hiding in one of the houses.
+''',
+		action='Talk to woman',
+		effect=Effect(
+			description='''
+Woman:
+  I heard you have come to save us from those terrible beasts. I crafted this breastplate especially for you.
+  
+You put on the breastplate. You gain 40 HP.
+''',
+			hp=40
+		)
+	)
+
+# Treasure
+class Chest1(Item):
+	def __init__(self):
+		super().__init__(
+			name='Treasure Chest',
+			pre_description='''
+There is a rusty chest hidden behind bush and rock.
+''',
+			post_description='''
+You see an open chest. It\'s empty.
+''',
+			action='Open chest',
+			effect=Effect(
+				description='''
+You crack the chest open. There are five coins in it. You put them in your pocket.
+''',
+				coins=5
+			)
+		)
+class Chest2(Item):
+	def __init__(self):
+		super().__init__(
+			name='Treasure Chest',
+			pre_description='''
+There is a rusty chest hidden behind bush and rock.
+''',
+			post_description='''
+You see an open chest. It\'s empty.
+''',
+			action='Open chest',
+			effect=Effect(
+				description='''
+You crack the chest open. There are ten coins in it. You put them in your pocket.
+''',
+				coins=10
+			)
+		)
+class Chest3(Item):
+	def __init__(self):
+		super().__init__(
+			name='Treasure Chest',
+			pre_description='''
+There is a rusty chest hidden behind bush and rock.''',
+			post_description='''
+You see an open chest. It\'s empty.
+''',
+			action='Open chest',
+			effect=Effect(
+				description='''
+You crack the chest open. There are 15 coins in it. You put them in your pocket.
+''',
+				coins=15
+			)
+		)
+
+# Keys
+class Key1(Item):
+	def __init__(self):
+		super().__init__(
+			name='Key 1',
+			pre_description='''
+You see a middle aged man sitting in front of a cottage.
+''',
+			post_description='''
+The man is nowhere to be seen. He must hava gone inside.
+''',
+			action='Talk to man',
+			effect=Effect(
+				description='''
+Man:
+	I expected you. I appreciate your efforts for our island. I have the key to that door. Do you really want to go there?
+
+You:
+	What is behind that door?
+	
+Man:
+	Well, I\'ve never been there, but it\'s said that behind that door is the most terrible of all those beasts.
+	
+You:
+	I will go. I must find the source of this evil.
+	
+Man:
+	All right. Here is the key. I hope I will see you again. And I don\'t even dare to hope that you will free us from this horror. 
+	
+New key added to inventory.
+''',
+				key=self
 			)
 		)
 
@@ -320,139 +453,5 @@ The enormous corpse of a dragon is lying on the ground. It smells terrible.
 ''',
 				weapon_prefix='Burning ',
 				weapon_boost=30
-			)
-		)
-	
-
-class BrPlate(Item):
-	def __init__(self):
-		super().__init__(
-			name='Woman',
-			pre_description='''
-You walk into a small village. It looks abandoned. Then you notice a woman peeking out of the window of a forge. As she sees you, she disappears into the house. Shortly after, she opens the door, waving you to come to her, all the while looking anxiously left and right.
-''',
-		post_description='''
-The woman is gone. You hope she is safely hiding in one of the houses.
-''',
-		action='Talk to woman',
-		effect=Effect(
-			description='''
-Woman:
-  I heard you have come to save us from those terrible beasts. I crafted this breastplate especially for you.
-  
-You put on the breastplate. You gain 40 HP.
-''',
-			hp=40
-		)
-	)
-
-class OldSword(Weapon):
-	def __init__(self):
-		super().__init__(
-			name='Old Sword',
-			pre_description='''
-There is a small cottage in the shade of the forest. You see an old man on the porch.
-''',
-			post_description='''
-The old man you met before is now gone.
-''',
-			damage=45,
-			action='Talk to old man',
-			effect=Effect(
-				description='''
-Old man:
-	When I was young, I used to fight those monsters. Now I\'m too old to fight. I can only hide from them. Take my old sword.
-''',
-				weapon=self
-			)
-		)
-	
-# Treasure
-class Chest1(Item):
-	def __init__(self):
-		super().__init__(
-			name='Treasure Chest',
-			pre_description='''
-There is a rusty chest hidden behind bush and rock.
-''',
-			post_description='''
-You see an open chest. It\'s empty.
-''',
-			action='Open chest',
-			effect=Effect(
-				description='''
-You crack the chest open. There are five coins in it. You put them in your pocket.
-''',
-				coins=5
-			)
-		)
-class Chest2(Item):
-	def __init__(self):
-		super().__init__(
-			name='Treasure Chest',
-			pre_description='''
-There is a rusty chest hidden behind bush and rock.
-''',
-			post_description='''
-You see an open chest. It\'s empty.
-''',
-			action='Open chest',
-			effect=Effect(
-				description='''
-You crack the chest open. There are ten coins in it. You put them in your pocket.
-''',
-				coins=10
-			)
-		)
-class Chest3(Item):
-	def __init__(self):
-		super().__init__(
-			name='Treasure Chest',
-			pre_description='''
-There is a rusty chest hidden behind bush and rock.''',
-			post_description='''
-You see an open chest. It\'s empty.
-''',
-			action='Open chest',
-			effect=Effect(
-				description='''
-You crack the chest open. There are 15 coins in it. You put them in your pocket.
-''',
-				coins=15
-			)
-		)
-
-# Keys
-class Key1(Item):
-	def __init__(self):
-		super().__init__(
-			name='Key 1',
-			pre_description='''
-You see a middle aged man sitting in front of a cottage.
-''',
-			post_description='''
-The man is nowhere to be seen. He must hava gone inside.
-''',
-			action='Talk to man',
-			effect=Effect(
-				description='''
-Man:
-	I expected you. I appreciate your efforts for our island. I have the key to that door. Do you really want to go there?
-
-You:
-	What is behind that door?
-	
-Man:
-	Well, I\'ve never been there, but it\'s said that behind that door is the most terrible of all those beasts.
-	
-You:
-	I will go. I must find the source of this evil.
-	
-Man:
-	All right. Here is the key. I hope I will see you again. And I don\'t even dare to hope that you will free us from this horror. 
-	
-New key added to inventory.
-''',
-				key=self
 			)
 		)
